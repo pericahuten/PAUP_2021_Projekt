@@ -94,3 +94,7 @@ C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\obj\Debug\Paup_2021_Se
 C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\obj\Debug\Paup_2021_ServisVozila.csproj.CopyComplete
 C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\obj\Debug\Paup_2021_ServisVozila.dll
 C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\obj\Debug\Paup_2021_ServisVozila.pdb
+C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\bin\PagedList.dll
+C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\bin\PagedList.Mvc.dll
+C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\bin\PagedList.xml
+C:\Users\huten\Source\Repos\pericahuten\PAUP_2021_Projekt\bin\PagedList.Mvc.xml
