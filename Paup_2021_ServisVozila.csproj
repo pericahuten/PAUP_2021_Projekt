@@ -213,10 +213,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Servis\Index.cshtml" />
     <Content Include="Views\Korisnici\Index.cshtml" />
+    <Content Include="Views\Automobili\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Automobili\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
