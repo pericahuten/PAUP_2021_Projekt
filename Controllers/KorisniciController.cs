@@ -14,7 +14,7 @@ namespace Paup_2021_ServisVozila.Controllers
         // GET: Korisnici
         public ActionResult Index()
         {
-            var listaKorisnika = bazaPodataka.PopisKorisnika.OrderBy(x => x.Ime).ToList();
+            var listaKorisnika = bazaPodataka.PopisKorisnika.ToList();
             return View(listaKorisnika);
         }
     }
