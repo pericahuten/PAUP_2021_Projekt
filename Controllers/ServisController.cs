@@ -14,7 +14,7 @@ namespace Paup_2021_ServisVozila.Controllers
         // GET: Servis
         public ActionResult Index()
         {
-            var listaServisa = bazaPodataka.PopisServisa.OrderBy(x => x.DatumKreiranja).ToList();
+            var listaServisa = bazaPodataka.PopisServisa.ToList();
             return View(listaServisa);
 
 

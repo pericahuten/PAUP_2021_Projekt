@@ -13,7 +13,7 @@ namespace Paup_2021_ServisVozila.Controllers
         // GET: Automobili
         public ActionResult Index()
         {
-            var listaAutomobila = bazaPodataka.PopisAutomobila.OrderBy(x => x.Proizvodac).ToList();
+            var listaAutomobila = bazaPodataka.PopisAutomobila.ToList();
             return View(listaAutomobila);
         }
     }

@@ -12,27 +12,22 @@ namespace Paup_2021_ServisVozila.Models
     {
         [Key]
         [Display(Name = "ID vozila")]
-        public int id { get; set; }
+        public string id { get; set; }
 
         [Display(Name = "VIN vozila")]
         [Required(ErrorMessage = "{0} je obavezan")]
         public string Vin { get; set; }
 
-        [ForeignKey("Korisnik")]
         [Display(Name = "Id korisnika")]
         [Required(ErrorMessage = "{0} je obavezan")]
-        public int korisnikId { get; set; }
-        
-        public virtual Korisnik IDKorisnika { get; set; }
-        //fali 2 virtaulne klase
+        [ForeignKey("Vlasnik")]
+        public string korisnikId { get; set; }
+        public virtual Korisnik Vlasnik { get; set; }
 
-        [ForeignKey("Proizvodac")]
         [Display(Name = "Proizvodac automobila")]
         [Required(ErrorMessage = "{0} je obavezan")]
         public int Proizvodac { get; set; }
 
-
-        //fali 1 virtaulne klasa
 
         [Display(Name = "Model vozila")]
         [Required(ErrorMessage = "{0} je obavezan")]

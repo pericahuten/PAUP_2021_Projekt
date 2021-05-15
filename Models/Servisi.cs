@@ -11,26 +11,33 @@ namespace Paup_2021_ServisVozila.Models
     public class Servisi
     {
         [Key]
+        [Column("ID_Servisa")]
         [Display(Name ="Id servisa")]
         public int Id { get; set; }
 
-        [Display(Name ="Id automobila")]
-        [Required(ErrorMessage ="{0} je obavezan!!")]
-        [StringLength(17, MinimumLength =17, ErrorMessage ="{0} mora biti duljine {1} znakova")]
-        [ForeignKey("AutoId")]
-        public string AutoId { get; set; } //fali virtual klasa
+        [Display(Name = "Id automobila")]
+        [Required(ErrorMessage = "{0} je obavezan!!")]
+        [ForeignKey("idAuto")]
+        public string AutoID { get; set; }
+        public virtual Automobili idAuto { get; set; }
         
 
         [Column("Datum_kreiranja_zahtjeva")]
         [Display(Name =("Datum kreiranja"))]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime DatumKreiranja { get; set; }
 
         [Column("Datum_pocetka_servisa")]
         [Display(Name ="Datum pocetka servisa")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime DatumPocetka { get; set; }
 
         [Column("Datum_zavrsetka_servisa")]
         [Display(Name ="Datum zavrsetka servisa")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime DatumZavrsetka { get; set; }
 
         [Column("Napomena_vlasnika")]
@@ -45,11 +52,13 @@ namespace Paup_2021_ServisVozila.Models
         public int Kilometraza { get; set; }
 
         [Display(Name ="Serviser")]
-        public int Serviser { get; set; }
+        public string Serviser { get; set; }
 
-        [ForeignKey("Status Id")]
         [Display(Name ="Status servisa")]
-        public int Status { get; set; }
+        [Column("Status")]
+        [ForeignKey("StatusId")]
+        public int StatusAuta { get; set; }
+        public virtual Status StatusId { get; set; }
 
 
 
