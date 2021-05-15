@@ -1,8 +1,43 @@
-﻿
+﻿@using Paup_2021_ServisVozila.Models
+@model List<Servisi>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Popis servisa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID Servisa</th>
+            <th>Auto ID</th>
+            <th>Datum kreiranja zahtjeva</th>
+            <th>Datum pocetka servisa</th>
+            <th>Datum zavrsetka servisa</th>
+            <th>Napomena vlasnika</th>
+            <th>Napomena servisera</th>
+            <th>Kilometraža</th>
+            <th>Serviser</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ser in Model)
+        {
+            <tr>
+                <td>@ser.Id</td>
+                <td>@ser.AutoId</td>
+                <td>@ser.DatumKreiranja</td>
+                <td>@ser.DatumPocetka</td>
+                <td>@ser.DatumZavrsetka</td>
+                <td>@ser.NapomenaVlasnika</td>
+                <td>@ser.NapomenServisera</td>
+                <td>@ser.Kilometraza</td>
+                <td>@ser.Serviser</td>
+                <td>@ser.Status</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

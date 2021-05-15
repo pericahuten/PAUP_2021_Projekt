@@ -11,5 +11,10 @@ namespace Paup_2021_ServisVozila.Models
     public class BazaDbContext : DbContext
     {
         public DbSet<Korisnik> PopisKorisnika { get; set; }
+
+        public DbSet<Automobili> PopisAutomobila { get; set; }
+
+        public DbSet<Servisi> PopisServisa { get; set; }
+
     }
 }
