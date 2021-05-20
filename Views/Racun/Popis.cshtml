@@ -1,0 +1,34 @@
+﻿@using Paup_2021_ServisVozila.Models
+@model List<Racun>
+@{
+    ViewBag.Title = "Popis racuna";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+
+
+    <thead>
+        <tr>
+            <th>ID Racuna</th>
+            <th>ID Servisa</th>
+            <th>Datum</th>
+            <th>Radnik</th>
+            <th>Cijena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var racun in Model)
+            {
+                <tr>
+                    <td>@racun.id</td>
+                    <td>@(racun.servisiFK?.Id)</td>
+                    <td>@racun.Datum.ToString("dd.MM.yyyy")</td>
+                    <td>@racun.osoba</td>
+                    <td>@racun.cijena</td>
+                </tr>
+            }
+    </tbody>
+</table>

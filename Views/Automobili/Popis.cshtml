@@ -9,7 +9,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
             <th>VIN</th>
             <th>Vlasnik vozila</th>
             <th>Proizvođač</th>
@@ -21,10 +20,9 @@
         @foreach (var auto in Model)
         {
             <tr>
-                <td>@auto.id</td>
                 <td>@auto.Vin</td>
                 <td>@(auto.Vlasnik?.PrezimeIme)</td>
-                <th>@auto.Proizvodac</th>
+                <th>@(auto.marka?.Marke)</th>
                 <th>@auto.Model</th>
                 <th>@auto.Registracija</th>
             </tr>

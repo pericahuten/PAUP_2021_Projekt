@@ -7,15 +7,14 @@ using System.Web.Mvc;
 
 namespace Paup_2021_ServisVozila.Controllers
 {
-    
-    public class KorisniciController : Controller
+    public class RacunStavkeController : Controller
     {
-        BazaDbContext bazaPodataka = new BazaDbContext();
-        // GET: Korisnici
+        BazaDbContext db = new BazaDbContext();
+        // GET: RacunStavke
         public ActionResult Popis()
         {
-            var listaKorisnika = bazaPodataka.PopisKorisnika.ToList();
-            return View(listaKorisnika);
+            var popisStavki = db.PopisStavki.ToList();
+            return View(popisStavki);
         }
     }
 }

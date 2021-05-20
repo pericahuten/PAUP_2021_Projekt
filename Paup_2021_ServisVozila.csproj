@@ -159,16 +159,24 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArtikliController.cs" />
     <Compile Include="Controllers\AutomobiliController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KorisniciController.cs" />
+    <Compile Include="Controllers\MarkeAutomobiliController.cs" />
+    <Compile Include="Controllers\RacunController.cs" />
+    <Compile Include="Controllers\RacunStavkeController.cs" />
     <Compile Include="Controllers\ServisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Artikli.cs" />
     <Compile Include="Models\Automobili.cs" />
     <Compile Include="Models\BazaDbContext.cs" />
     <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\MarkeAutomobili.cs" />
+    <Compile Include="Models\Racun.cs" />
+    <Compile Include="Models\RacunStavke.cs" />
     <Compile Include="Models\Servisi.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,9 +220,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Servis\Index.cshtml" />
-    <Content Include="Views\Korisnici\Index.cshtml" />
-    <Content Include="Views\Automobili\Index.cshtml" />
+    <Content Include="Views\Servis\Popis.cshtml" />
+    <Content Include="Views\Korisnici\Popis.cshtml" />
+    <Content Include="Views\Automobili\Popis.cshtml" />
+    <Content Include="Views\MarkeAutomobili\Popis.cshtml" />
+    <Content Include="Views\Racun\Popis.cshtml" />
+    <Content Include="Views\Artikli\Popis.cshtml" />
+    <Content Include="Views\RacunStavke\Popis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

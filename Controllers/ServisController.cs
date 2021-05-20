@@ -12,15 +12,11 @@ namespace Paup_2021_ServisVozila.Controllers
     {
         BazaDbContext bazaPodataka = new BazaDbContext();
         // GET: Servis
-        public ActionResult Index()
+        public ActionResult Popis()
         {
             var listaServisa = bazaPodataka.PopisServisa.ToList();
             return View(listaServisa);
 
-
-            //ViewBag.Title = "Početna stranica servisa";
-            //ViewBag.Servis = "Servis d.o.o";
-            //return View();
         }
     }
 }
