@@ -11,9 +11,6 @@ namespace Paup_2021_ServisVozila.Models
     public class Automobili
     {
         [Key]
-        [Display(Name = "ID vozila")]
-        public string id { get; set; }
-
         [Display(Name = "VIN vozila")]
         [Required(ErrorMessage = "{0} je obavezan")]
         public string Vin { get; set; }
@@ -26,8 +23,10 @@ namespace Paup_2021_ServisVozila.Models
 
         [Display(Name = "Proizvodac automobila")]
         [Required(ErrorMessage = "{0} je obavezan")]
+        [ForeignKey("marka")]
         public int Proizvodac { get; set; }
 
+        public virtual MarkeAutomobili marka { get; set; }
 
         [Display(Name = "Model vozila")]
         [Required(ErrorMessage = "{0} je obavezan")]

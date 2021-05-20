@@ -11,7 +11,7 @@ namespace Paup_2021_ServisVozila.Controllers
     {
         BazaDbContext bazaPodataka = new BazaDbContext();
         // GET: Automobili
-        public ActionResult Index()
+        public ActionResult Popis()
         {
             var listaAutomobila = bazaPodataka.PopisAutomobila.ToList();
             return View(listaAutomobila);

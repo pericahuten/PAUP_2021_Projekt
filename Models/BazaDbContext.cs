@@ -16,5 +16,15 @@ namespace Paup_2021_ServisVozila.Models
 
         public DbSet<Servisi> PopisServisa { get; set; }
 
+        public DbSet<MarkeAutomobili> PopisMarka{ get; set; }
+
+        public DbSet<Racun> PopisRacuna { get; set; }
+
+        public DbSet<RacunStavke> PopisStavki { get; set; }
+
+        public DbSet<Artikli> PopisArtikla { get; set; }
+
+
+
     }
 }

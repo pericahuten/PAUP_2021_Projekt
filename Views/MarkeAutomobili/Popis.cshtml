@@ -1,0 +1,26 @@
+﻿@using Paup_2021_ServisVozila.Models
+@model List<MarkeAutomobili>
+@{
+    ViewBag.Title = "Popis marka automobila";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Marka</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var marka in Model)
+            {
+                <tr>
+                    <td>@marka.id</td>
+                    <td>@marka.Marke</td>
+                </tr>
+            }
+    </tbody>
+</table>
+

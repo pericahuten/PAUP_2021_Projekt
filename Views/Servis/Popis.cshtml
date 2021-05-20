@@ -14,7 +14,7 @@
             <th>Datum kreiranja zahtjeva</th>
             <th>Datum pocetka servisa</th>
             <th>Datum zavrsetka servisa</th>
-            <th>Auto ID</th>
+            <th>Vlasnik vozila</th>
             <th>Napomena vlasnika</th>
             <th>Napomena servisera</th>
             <th>Kilometraža</th>
@@ -30,7 +30,7 @@
                 <td>@servis.DatumKreiranja.ToString("dd.MM.yyyy")</td>
                 <td>@servis.DatumPocetka.ToString("dd.MM.yyyy")</td>
                 <td>@servis.DatumZavrsetka.ToString("dd.MM.yyyy")</td>
-                <td>@(servis.AutoID)</td>
+                <td>@(servis.idAuto?.Vlasnik?.PrezimeIme)</td>
                 <td>@servis.NapomenaVlasnika</td>
                 <td>@servis.NapomenServisera</td>
                 <td>@servis.Kilometraza</td>

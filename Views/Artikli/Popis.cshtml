@@ -1,0 +1,31 @@
+﻿@using Paup_2021_ServisVozila.Models
+@model List<Artikli>
+@{
+    ViewBag.Title = "Popis artikla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID artikla</th>
+            <th>Naziv artikla</th>
+            <th>Jedinica mjere</th>
+            <th>Cijena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var artikl in Model)
+        {
+            <tr>
+                <th>@artikl.id</th>
+                <th>@artikl.Naziv</th>
+                <th>@artikl.jedinicaMjere</th>
+                <th>@artikl.cijena</th>
+            </tr>
+        }
+</tbody>
+    </table>
+
