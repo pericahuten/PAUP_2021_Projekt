@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -56,6 +56,9 @@
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=8.0.19.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -170,15 +173,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Misc\LogiraniKorisnik.cs" />
+    <Compile Include="Misc\LogiraniKorisnikSerializeModel.cs" />
+    <Compile Include="Misc\OvlastiKorisnik.cs" />
+    <Compile Include="Misc\PasswordHelper.cs" />
     <Compile Include="Models\Artikli.cs" />
     <Compile Include="Models\Automobili.cs" />
     <Compile Include="Models\BazaDbContext.cs" />
     <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\KorisnikPrijava.cs" />
     <Compile Include="Models\MarkeAutomobili.cs" />
+    <Compile Include="Models\Ovlast.cs" />
     <Compile Include="Models\Racun.cs" />
     <Compile Include="Models\RacunStavke.cs" />
     <Compile Include="Models\Servisi.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\VIN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +237,12 @@
     <Content Include="Views\Racun\Popis.cshtml" />
     <Content Include="Views\Artikli\Popis.cshtml" />
     <Content Include="Views\RacunStavke\Popis.cshtml" />
+    <Content Include="Views\Korisnici\Prijava.cshtml" />
+    <Content Include="Views\Korisnici\Registracija.cshtml" />
+    <Content Include="Views\Korisnici\RegistracijaOk.cshtml" />
+    <Content Include="Views\Automobili\DodajAuto.cshtml" />
+    <Content Include="Views\Automobili\DodavanjeAuta.cshtml" />
+    <Content Include="Views\Servis\Naruzdba.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

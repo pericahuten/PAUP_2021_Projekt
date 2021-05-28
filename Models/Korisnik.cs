@@ -11,9 +11,6 @@ namespace Paup_2021_ServisVozila.Models
     public class Korisnik
     {
         [Key]
-        [Display(Name = "ID Korisnika")]
-        public string Id { get; set; }
-
         [Display(Name = "Korisničko ime")]
         [Required(ErrorMessage = "{0} je obavezno")]
         [Column("korisnicko_ime")]
@@ -48,9 +45,11 @@ namespace Paup_2021_ServisVozila.Models
 
         public string Lozinka { get; set; }
 
-        [Display(Name = "Administrator")]
-        [Column("isAdmin")]
-        public bool Admin { get; set; }
+        [Column("ovlast")]
+        [Display(Name = "Ovlast")]
+        [ForeignKey("Ovlast")]
+        public string SifraOvlasti { get; set; }
+        public virtual Ovlast Ovlast { get; set; }
 
         [Display(Name = "Lozinka")]
         [DataType(DataType.Password)]
@@ -64,5 +63,6 @@ namespace Paup_2021_ServisVozila.Models
         [NotMapped]
         [Compare("LozinkaUnos2", ErrorMessage = "Lozinke moraju biti jednake")]
         public string LozinkaUnos2 { get; set; }
+
     }
 }
