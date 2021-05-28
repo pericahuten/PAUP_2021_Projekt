@@ -1,4 +1,5 @@
 ﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
 @model List<Korisnik>
 @{
     ViewBag.Title = "Popis korisnika";
@@ -7,27 +8,37 @@
 
 <h2>@ViewBag.Title</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Korisničko ime</th>
-            <th>Email</th>
-            <th>Prezime i ime</th>
-            <th>Mobilni broj</th>
-            <th>Administrator</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var kor in Model)
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Korisničko ime</th>
+                <th>Email</th>
+                <th>Prezime i ime</th>
+                <th>Mobilni broj</th>
+                <th>Ovlast</th>
+                @if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+                {
+                    <th>Akcije</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kor in Model)
             {
-                <tr>
-                    <td>@kor.KorisnickoIme</td>
-                    <td>@kor.Email</td>
-                    <th>@kor.PrezimeIme</th>
-                    <th>@kor.MobilniBroj</th>
-                    <th>@kor.Admin</th>
-                </tr>
+            <tr>
+                <td>@kor.KorisnickoIme</td>
+                <td>@kor.Email</td>
+                <th>@kor.PrezimeIme</th>
+                <th>@kor.MobilniBroj</th>
+                <th>@(kor.Ovlast?.Naziv)</th>
+                @if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+                {
+                    <td>
+                        @Html.ActionLink("Ažuriraj", "Azuriraj", new { KorisnickoIme = kor.KorisnickoIme }, new { @class = "btn btn-warning btn-sm" })
+                    </td>
+                }
+            </tr>
             }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 

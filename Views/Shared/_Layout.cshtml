@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Paup_2021_ServisVozila.Misc
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - PAUP Projekt Servis Vozila 2021</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,9 +21,26 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Korisnici", "Popis", "Korisnici")</li>
+                    <li>@Html.ActionLink("Početna", "Index", "Home")</li>
                     <li>@Html.ActionLink("Automobili", "Popis", "Automobili")</li>
                     <li>@Html.ActionLink("Servisi", "Popis", "Servis")</li>
+                    @if (User.Identity.IsAuthenticated &&
+                    (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                    {
+                        <li>@Html.ActionLink("Korisnici", "Popis", "Korisnici")</li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink((User as LogiraniKorisnik).PrezimeIme, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Odjava", "Odjava", "Korisnici")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Registracija", "Registracija", "Korisnici")</li>
+                        <li>@Html.ActionLink("Prijava", "Prijava", "Korisnici")</li>
+                    }
                 </ul>
             </div>
         </div>
@@ -36,6 +54,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

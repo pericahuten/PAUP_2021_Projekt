@@ -13,10 +13,10 @@ namespace Paup_2021_ServisVozila.Models
         [Key]
         [Display(Name = "VIN vozila")]
         [Required(ErrorMessage = "{0} je obavezan")]
+        [RegularExpression("[A-HJ-NPR-Z0-9]{13}[0-9]{4}", ErrorMessage = "Krivi format identifikacijskog broja vozila!")]
         public string Vin { get; set; }
 
         [Display(Name = "Id korisnika")]
-        [Required(ErrorMessage = "{0} je obavezan")]
         [ForeignKey("Vlasnik")]
         public string korisnikId { get; set; }
         public virtual Korisnik Vlasnik { get; set; }
@@ -25,7 +25,6 @@ namespace Paup_2021_ServisVozila.Models
         [Required(ErrorMessage = "{0} je obavezan")]
         [ForeignKey("marka")]
         public int Proizvodac { get; set; }
-
         public virtual MarkeAutomobili marka { get; set; }
 
         [Display(Name = "Model vozila")]
@@ -33,7 +32,7 @@ namespace Paup_2021_ServisVozila.Models
         public string Model { get; set; }
 
         [Display(Name = "Registracija vozila")]
-        [Required(ErrorMessage = "{0} je obavezana")]
+        [Required(ErrorMessage = "{0} je obavezna")]
         public string Registracija { get; set; }
     }
 }
