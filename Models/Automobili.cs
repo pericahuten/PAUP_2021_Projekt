@@ -34,5 +34,14 @@ namespace Paup_2021_ServisVozila.Models
         [Display(Name = "Registracija vozila")]
         [Required(ErrorMessage = "{0} je obavezna")]
         public string Registracija { get; set; }
+
+        public string Automobil
+        {
+            get
+            {
+                return marka?.Marke + " " + Model + ": " + Registracija;
+            }
+        }
+
     }
 }

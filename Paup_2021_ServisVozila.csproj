@@ -243,6 +243,8 @@
     <Content Include="Views\Automobili\DodajAuto.cshtml" />
     <Content Include="Views\Automobili\DodavanjeAuta.cshtml" />
     <Content Include="Views\Servis\Naruzdba.cshtml" />
+    <Content Include="Views\Servis\ServisDodan.cshtml" />
+    <Content Include="Views\Servis\Detalji.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

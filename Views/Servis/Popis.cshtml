@@ -1,4 +1,5 @@
 ﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
 @model List<Servisi>
 @{
     ViewBag.Title = "Popis servisa";
@@ -16,19 +17,47 @@
             <th>Kilometraža</th>
             <th>Serviser</th>
             <th>Status</th>
+            <th>Akcije</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var servis in Model)
+        @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
         {
-            <tr>
-                <td>@servis.Id</td>
-                <td>@servis.DatumKreiranja.ToString("dd.MM.yyyy")</td>
-                <td>@(servis.idAuto?.Vlasnik?.PrezimeIme)</td>
-                <td>@servis.Kilometraza</td>
-                <td>@servis.Serviser</td>
-                <td>@(servis.StatusId?.StatusAutomobila)</td>
-            </tr>
+            foreach (var servis in Model)
+            {
+                if (servis?.idAuto.Vlasnik.KorisnickoIme == ViewBag.Korisnik)
+                {
+                    <tr>
+                        <td>@servis.Id</td>
+                        <td>@servis.DatumKreiranja.ToString("dd.MM.yyyy")</td>
+                        <td>@(servis.idAuto?.Vlasnik?.PrezimeIme)</td>
+                        <td>@servis.Kilometraza</td>
+                        <td>@servis.Serviser</td>
+                        <td>@(servis.StatusId?.StatusAutomobila)</td>
+                        <td>
+                            @Html.ActionLink("Detalji", "Detalji", new { id = servis.Id }, new { @class = "btn btn-info btn-sm" })
+                        </td>
+                    </tr>
+                }
+            }
         }
+        else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+        {
+            foreach (var servis in Model)
+            {
+                <tr>
+                    <td>@servis.Id</td>
+                    <td>@servis.DatumKreiranja.ToString("dd.MM.yyyy")</td>
+                    <td>@(servis.idAuto?.Vlasnik?.PrezimeIme)</td>
+                    <td>@servis.Kilometraza</td>
+                    <td>@servis.Serviser</td>
+                    <td>@(servis.StatusId?.StatusAutomobila)</td>
+                    <td>
+                        @Html.ActionLink("Detalji", "Detalji", new { id = servis.Id }, new { @class = "btn btn-info btn-sm" })
+                    </td>
+                </tr>
+            }
+        }
+
     </tbody>
 </table>
