@@ -15,6 +15,11 @@ namespace Paup_2021_ServisVozila.Controllers
         // GET: Servis
         public ActionResult Popis()
         {
+            LogiraniKorisnik k = User as LogiraniKorisnik;
+            if(k != null)
+            {
+                ViewBag.Korisnik = k.KorisnickoIme;
+            }
             var listaServisa = bazaPodataka.PopisServisa.ToList();
             return View(listaServisa);
 
@@ -23,25 +28,42 @@ namespace Paup_2021_ServisVozila.Controllers
         public ActionResult Naruzdba()
         {
             LogiraniKorisnik k = User as LogiraniKorisnik;
-            var auti = bazaPodataka.PopisAutomobila.OrderBy(x => x.korisnikId).ToList();
-            auti.Insert(0, new Automobili { korisnikId = "", Vin = "Odaberite svoj auto" });
-            ViewBag.Auto = auti;
+            var vlasnik = bazaPodataka.PopisAutomobila.Where(x => x.korisnikId == k.KorisnickoIme).ToList();
+            vlasnik.Insert(0, new Automobili { Vin = null, Proizvodac = 0, Model = "Odaberite auto" });
+            ViewBag.Vlasnik = vlasnik;
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Naruzdba(Servisi servis, LogiraniKorisnik kor)
+        public ActionResult Naruzdba(Servisi servis)
         {
-            kor = User as LogiraniKorisnik;
-            Automobili auto = bazaPodataka.PopisAutomobila.FirstOrDefault(x => x.Vlasnik.ToString() == kor.KorisnickoIme);
             if (ModelState.IsValid)
             {
-                servis.AutoID = auto.Vin;
                 servis.DatumKreiranja = DateTime.Now;
                 servis.StatusAuta = 1;
+                servis.Serviser = "Nedodjeljen";
+                bazaPodataka.PopisServisa.Add(servis);
+                bazaPodataka.SaveChanges();
+                return View("ServisDodan");
             }
-            return View();
+            return View(servis);
+        }
+
+        public ActionResult Detalji(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToAction("Popis");
+            }
+
+            Servisi servisi = bazaPodataka.PopisServisa.FirstOrDefault(x => x.Id == id);
+
+            if (servisi == null)
+            {
+                return RedirectToAction("Popis");
+            }
+            return View(servisi);
         }
     }
 }

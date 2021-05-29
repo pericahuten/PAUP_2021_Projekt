@@ -7,7 +7,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("DodajAuto", "Automobili", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Naruzdba", "Servis", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken();
     @Html.ValidationSummary(true, "Ispravite podatke!");
@@ -15,7 +15,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.AutoID, new { @class = "col-sm-2 control-label" })
         <div class="col-sm-10">
-            @Html.DropDownListFor(model => model.AutoID, new SelectList(ViewBag.auti, "korisnikId", "Vin"), new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.AutoID, new SelectList(ViewBag.Vlasnik, "Vin", "Automobil"), new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.AutoID, "", new { @class = "text-danger" })
         </div>
     </div>
