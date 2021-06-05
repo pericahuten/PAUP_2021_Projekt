@@ -1,0 +1,39 @@
+﻿@using Paup_2021_ServisVozila.Models
+@model RacunStavke
+@{
+    ViewBag.Title = "Dodavanje stavke racuna";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("DodajStavkuRacuna", "RacunStavke", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "Ispravite podatke!");
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sifraArtikla, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(model => model.sifraArtikla, new SelectList(ViewBag.Artikli, "id", "naziv"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.sifraArtikla, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.kolicina, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.kolicina, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.kolicina, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="false"></span> Spremi
+            </button>
+        </div>
+    </div>
+}

@@ -13,7 +13,7 @@
             <th>ID stavke</th>
             <th>ID računa</th>
             <th>Redni broj</th>
-            <th>Sifra artikla</th>
+            <th>Artikl</th>
             <th>Kolicina</th>
             <th>Iznos</th>
         </tr>
@@ -23,7 +23,7 @@
             {
                 <tr>
                     <th>@stavka.id</th>
-                    <th>@(stavka.RacunFK?.servis)</th>
+                    <th>@(stavka.idRacuna)</th>
                     <th>@stavka.redniBroj</th>
                     <th>@(stavka.sifraArtikla)</th>
                     <th>@stavka.kolicina</th>

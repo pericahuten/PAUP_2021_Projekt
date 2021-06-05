@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default bg-primary navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,16 +17,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Servis vozila 2021", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Početna", "Index", "Home")</li>
                     <li>@Html.ActionLink("Automobili", "Popis", "Automobili")</li>
                     <li>@Html.ActionLink("Servisi", "Popis", "Servis")</li>
                     @if (User.Identity.IsAuthenticated &&
                     (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
                     {
+                        <li>@Html.ActionLink("Dodaj Model", "DodajMarku", "MarkeAutomobili")</li>
                         <li>@Html.ActionLink("Korisnici", "Popis", "Korisnici")</li>
                     }
                 </ul>
@@ -49,7 +49,8 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.ToString("dd.MM.yyyy") - Servis Vozila</p>
+            <p></p>
         </footer>
     </div>
 

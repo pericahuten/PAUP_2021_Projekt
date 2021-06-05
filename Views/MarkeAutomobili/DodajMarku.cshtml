@@ -1,0 +1,33 @@
+﻿@using Paup_2021_ServisVozila.Models
+@model MarkeAutomobili
+@{
+    ViewBag.Title = "Dodavanje marke automobila";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("DodajMarku", "MarkeAutomobili", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "Ispravite podatke!");
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Marke, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Marke, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Marke, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="false"></span> Spremi
+            </button>
+        </div>
+    </div>
+}

@@ -1,4 +1,5 @@
 ﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
 @model List<Racun>
 @{
     ViewBag.Title = "Popis racuna";
@@ -13,22 +14,55 @@
     <thead>
         <tr>
             <th>ID Racuna</th>
-            <th>ID Servisa</th>
+            <th>Vlasnik servisiranog vozila</th>
             <th>Datum</th>
             <th>Radnik</th>
             <th>Cijena</th>
+            <th>Akcije</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var racun in Model)
+        @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
+        {
+            foreach (var racun in Model)
+            {
+                if (racun.servisiFK.idAuto.Vlasnik.KorisnickoIme == ViewBag.Korisnik)
+                {
+                    <tr>
+                        <td>@racun.id</td>
+                        <td>@(racun.servisiFK?.idAuto.Vlasnik.PrezimeIme)</td>
+                        <td>@racun.Datum.ToString("dd.MM.yyyy")</td>
+                        <td>@racun.osoba</td>
+                        <td>@racun.cijena</td>
+                        <td>
+                            @Html.ActionLink("Detalji", "Detalji", new { id = racun.id }, new { @class = "btn btn-info btn-sm" })
+                        </td>
+                    </tr>
+                }
+            }
+        }
+        else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+        {
+            foreach (var racun in Model)
             {
                 <tr>
-                    <td>@racun.id</td>
-                    <td>@(racun.servisiFK?.Id)</td>
-                    <td>@racun.Datum.ToString("dd.MM.yyyy")</td>
-                    <td>@racun.osoba</td>
-                    <td>@racun.cijena</td>
+                        <td>@racun.id</td>
+                        <td>@(racun.servisiFK?.idAuto.Vlasnik.PrezimeIme)</td>
+                        <td>@racun.Datum.ToString("dd.MM.yyyy")</td>
+                        <td>@racun.osoba</td>
+                        <td>@racun.cijena</td>
+                        <td>
+                            @Html.ActionLink("Detalji", "Detalji", new { id = racun.id }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Dodavanje Stavki", "DodajStavkuRacuna", "RacunStavke", new { id = racun.id }, new { @class = "btn btn-info btn-sm" })
+                        </td>
                 </tr>
             }
+        }
     </tbody>
 </table>
+
+<script>
+    function popupfunk() {
+        alert("Racun je storniran!");
+    }
+</script>
