@@ -11,6 +11,7 @@ namespace Paup_2021_ServisVozila.Models
     [Table("marke_automobili")]
     public class MarkeAutomobili
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [Display(Name = "Marka automobila")]

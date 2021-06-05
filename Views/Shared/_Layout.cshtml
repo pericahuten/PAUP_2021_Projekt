@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-default bg-primary navbar-fixed-top">
+    <nav class="navbar navbar-inverse bg-primary navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -21,15 +21,48 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Automobili", "Popis", "Automobili")</li>
-                    <li>@Html.ActionLink("Servisi", "Popis", "Servis")</li>
-                    @if (User.Identity.IsAuthenticated &&
-                    (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
-                    {
-                        <li>@Html.ActionLink("Dodaj Model", "DodajMarku", "MarkeAutomobili")</li>
-                        <li>@Html.ActionLink("Korisnici", "Popis", "Korisnici")</li>
-                    }
-                </ul>
+                        @if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator) || (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik)))
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Automobili
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Popis", "Popis", "Automobili")</li>
+                                    <li>@Html.ActionLink("Dodaj auto", "DodajAuto", "Automobili")</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Servisi
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Popis", "Popis", "Servis")</li>
+                                    <li>@Html.ActionLink("Narudžba", "Naruzdba", "Servis")</li>
+                                </ul>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated &&
+                        (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                        {
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Admin meni
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Dodaj marku", "DodajMarku", "MarkeAutomobili")</li>
+                                    <li>@Html.ActionLink("Dodaj artikl", "DodajArtikl", "Artikli")</li>
+                                    <li>@Html.ActionLink("Popis korisnika", "Popis", "Korisnici")</li>
+                                    <li>@Html.ActionLink("Popis računa", "Popis", "Racun")</li>
+                                </ul>
+                            </li>
+
+
+                        }
+                    </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -44,7 +77,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -2,6 +2,7 @@
 using Paup_2021_ServisVozila.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,6 +20,40 @@ namespace Paup_2021_ServisVozila.Controllers
         {
             var listaKorisnika = bazaPodataka.PopisKorisnika.ToList();
             return View(listaKorisnika);
+        }
+        public ActionResult Azuriraj(string korisnickoime)
+        {
+            Korisnik korisnik;
+            if (korisnickoime == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            korisnik = bazaPodataka.PopisKorisnika.FirstOrDefault(x=>x.KorisnickoIme == korisnickoime);
+            if (korisnik == null)
+            {
+                return HttpNotFound();
+            }
+            var ovlast = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
+            ViewBag.Ovlast = ovlast;
+
+            return View(korisnik);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Azuriraj(Korisnik kor)
+        {
+            if (kor.KorisnickoIme != "")
+            {
+                bazaPodataka.Entry(kor).State = System.Data.Entity.EntityState.Modified;
+            }
+            if (ModelState.IsValid)
+            {
+                kor.Lozinka = Misc.PasswordHelper.IzracunajHash(kor.LozinkaUnos1);
+                bazaPodataka.SaveChanges();
+                return RedirectToAction("Popis");
+            }
+            return View(kor);
         }
 
         [HttpGet]

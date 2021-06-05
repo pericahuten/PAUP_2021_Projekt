@@ -9,6 +9,7 @@ using Paup_2021_ServisVozila.Models;
 
 namespace Paup_2021_ServisVozila.Controllers
 {
+    [Authorize(Roles = OvlastiKorisnik.Administrator + ", " + OvlastiKorisnik.Korisnik)]
     public class ServisController : Controller
     {
         BazaDbContext bazaPodataka = new BazaDbContext();
@@ -35,7 +36,6 @@ namespace Paup_2021_ServisVozila.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult Naruzdba(Servisi servis)
         {
             if (ModelState.IsValid)

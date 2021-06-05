@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Paup_2021_ServisVozila.Controllers
 {
+    [Authorize(Roles = OvlastiKorisnik.Administrator + ", " + OvlastiKorisnik.Korisnik)]
     public class RacunController : Controller
     {
         BazaDbContext bazaPodataka = new BazaDbContext();
@@ -22,7 +23,7 @@ namespace Paup_2021_ServisVozila.Controllers
             var listaRacuna = bazaPodataka.PopisRacuna.ToList();
             return View(listaRacuna);
         }
-
+        [Authorize(Roles = OvlastiKorisnik.Administrator)]
         public ActionResult DodajRacun(Racun r, int id)
         {
             LogiraniKorisnik logKor = User as LogiraniKorisnik;

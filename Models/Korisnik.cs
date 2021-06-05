@@ -59,7 +59,7 @@ namespace Paup_2021_ServisVozila.Models
 
         [Display(Name = "Ponovljena lozinka")]
         [DataType(DataType.Password)]
-        [Required]
+        [Required(ErrorMessage = "{0} je obavezna")]
         [NotMapped]
         [Compare("LozinkaUnos2", ErrorMessage = "Lozinke moraju biti jednake")]
         public string LozinkaUnos2 { get; set; }

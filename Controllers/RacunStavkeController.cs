@@ -38,8 +38,7 @@ namespace Paup_2021_ServisVozila.Controllers
             var price = 0;
             rs.redniBroj = 1;
             foreach (var x in popisStavki)
-            { 
-                price += x.iznos; 
+            {  
                 if (x.redniBroj == rs.redniBroj)
                 {
                     rs.redniBroj++;
@@ -49,7 +48,11 @@ namespace Paup_2021_ServisVozila.Controllers
             {
                 rs.idRacuna = r.id;
                 rs.iznos = artikli.cijena * rs.kolicina;
-                r.cijena = price;
+                foreach (var x in popisStavki)
+                {
+                    price += x.iznos; 
+                }
+                r.cijena = price+rs.iznos;
                 servis.StatusAuta = 3;
                 bazaPodataka.PopisStavki.Add(rs);
                 bazaPodataka.SaveChanges();
