@@ -4,8 +4,14 @@
     ViewBag.Title = "Popis marka automobila";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>@ViewBag.Title</h2>
+
+<a href="@Url.Action("DodajMarku", "MarkeAutomobili")" class="btn btn-block">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Dodavanje nove marke
+</a>
+
+<br />
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -14,13 +20,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var marka in Model)
-            {
-                <tr>
-                    <td>@marka.id</td>
-                    <td>@marka.Marke</td>
-                </tr>
-            }
+        @foreach (var marka in Model)
+        {
+            <tr>
+                <td>@marka.id</td>
+                <td>@marka.Marke</td>
+            </tr>
+        }
     </tbody>
 </table>
 

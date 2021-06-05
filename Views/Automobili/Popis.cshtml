@@ -1,4 +1,5 @@
 ﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
 @model List<Automobili>
 @{
     ViewBag.Title = "Popis automobila";
@@ -14,18 +15,38 @@
             <th>Proizvođač</th>
             <th>Model</th>
             <th>Registracija</th>
+            <th>Akcije</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var auto in Model)
+        @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
         {
-            <tr>
-                <td>@auto.Vin</td>
-                <td>@(auto.Vlasnik?.PrezimeIme)</td>
-                <th>@(auto.marka?.Marke)</th>
-                <th>@auto.Model</th>
-                <th>@auto.Registracija</th>
-            </tr>
+            foreach (var auto in Model)
+            {
+                if (auto?.Vlasnik.KorisnickoIme == ViewBag.Korisnik)
+                {
+                    <tr>
+                        <td>@auto.Vin</td>
+                        <td>@(auto.Vlasnik?.PrezimeIme)</td>
+                        <td>@(auto.marka?.Marke)</td>
+                        <td>@auto.Model</td>
+                        <td>@auto.Registracija</td>
+                    </tr>
+                }
+            }
+        }
+        else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+        {
+            foreach (var auto in Model)
+            {
+                <tr>
+                    <td>@auto.Vin</td>
+                    <td>@(auto.Vlasnik?.PrezimeIme)</td>
+                    <th>@(auto.marka?.Marke)</th>
+                    <th>@auto.Model</th>
+                    <th>@auto.Registracija</th>
+                </tr>
+            }
         }
     </tbody>
 </table>

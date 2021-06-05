@@ -54,6 +54,7 @@
                     <td>@(servis.StatusId?.StatusAutomobila)</td>
                     <td>
                         @Html.ActionLink("Detalji", "Detalji", new { id = servis.Id }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Dodaj račun", "DodajRacun", "Racun", new { id = servis.Id }, new { @class = "btn btn-info btn-sm" })
                     </td>
                 </tr>
             }

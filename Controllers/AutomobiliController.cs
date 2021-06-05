@@ -8,12 +8,18 @@ using Paup_2021_ServisVozila.Models;
 
 namespace Paup_2021_ServisVozila.Controllers
 {
+    [Authorize(Roles = OvlastiKorisnik.Administrator + ", " + OvlastiKorisnik.Korisnik)]
     public class AutomobiliController : Controller
     {
         BazaDbContext bazaPodataka = new BazaDbContext();
         // GET: Automobili
         public ActionResult Popis()
         {
+            LogiraniKorisnik k = User as LogiraniKorisnik;
+            if(k!=null)
+            {
+                ViewBag.Korisnik = k.KorisnickoIme;
+            }
             var listaAutomobila = bazaPodataka.PopisAutomobila.ToList();
             return View(listaAutomobila);
         }
@@ -27,7 +33,6 @@ namespace Paup_2021_ServisVozila.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public ActionResult DodajAuto(Automobili auto)
         {
             if (!VIN.validateVIN(auto.Vin))

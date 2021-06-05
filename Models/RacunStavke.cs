@@ -39,7 +39,6 @@ namespace Paup_2021_ServisVozila.Models
 
         //potrebno izracunati iznos preko cijene artikla te kolicine
         [Display(Name = "Iznos")]
-        [Required(ErrorMessage = "{0} je obavezan")]
         public int iznos { get; set; }
     }
 }
