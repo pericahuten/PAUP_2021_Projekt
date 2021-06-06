@@ -1,24 +1,34 @@
-﻿@{
+﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
+@model List<MarkeAutomobili>
+@{
     ViewBag.Title = "Početna stranica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="jumbotron">
     <h1>Auto servis</h1>
     <p class="lead">Baza servisa</p>
+    @if (!User.Identity.IsAuthenticated) 
+    { 
+        <p ><strong>Molimo da se logirate ili registrirate za potpuni pristup stranici</strong></p>
+    }
 </div>
 
 <div class="row">
-    <div class="col-md-6">
-        <h2>O servisu</h2>
-        <p>
-            test
-        </p>
-        <p><a class="btn btn-default" href="">LOGIN</a></p>
-        <p><a class="btn btn-default" href="">REGISTRACIJA</a></p>
-    </div>
-    <div class="col-md-6">
-        <h2>O servisu</h2>
-        <p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
-        <p><a class="btn btn-default" href="">test</a></p>
+    <div class="col-md-12">
+        <h4>Servis je dostupan za sljedaće marke vozila</h4>
+        <div class="col-md-6">
+            <table class="table-condensed">
+                <tbody>
+                    @foreach(var marka in Model)
+                    { 
+                        <tr>
+                            <td>@marka.Marke</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

@@ -26,6 +26,7 @@ namespace Paup_2021_ServisVozila.Models
         [StringLength(30, MinimumLength = 2, ErrorMessage = "{0} mora biti duljine minimalno {2} a maksimalno {1} znakova")]
         public string Prezime { get; set; }
 
+        [Display(Name = "Prezime i ime")]
         public string PrezimeIme
         {
             get

@@ -25,6 +25,7 @@ namespace Paup_2021_ServisVozila.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DodajMarku(MarkeAutomobili ma)
         {
             var zadnji = bazaPodataka.PopisMarka.ToList().OrderByDescending(x => x.id).FirstOrDefault();
@@ -41,6 +42,38 @@ namespace Paup_2021_ServisVozila.Controllers
                 return RedirectToAction("Popis");
             }
             return View(ma);
+        }
+
+        public ActionResult Brisi(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Popis");
+            }
+
+            MarkeAutomobili a = bazaPodataka.PopisMarka.FirstOrDefault(x => x.id == id);
+
+            if (a == null)
+            {
+                return HttpNotFound();
+            }
+            return View(a);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Brisi(int id)
+        {
+            MarkeAutomobili s = bazaPodataka.PopisMarka.FirstOrDefault(x => x.id == id);
+            if (s == null)
+            {
+                return HttpNotFound();
+            }
+
+            bazaPodataka.PopisMarka.Remove(s);
+            bazaPodataka.SaveChanges();
+
+            return View("BrisiStatus");
         }
     }
 }

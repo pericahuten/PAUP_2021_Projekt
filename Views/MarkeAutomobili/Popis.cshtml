@@ -17,6 +17,7 @@
         <tr>
             <th>ID</th>
             <th>Marka</th>
+            <th>Akcije</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,9 @@
             <tr>
                 <td>@marka.id</td>
                 <td>@marka.Marke</td>
+                <td>
+                    @Html.ActionLink("Briši", "Brisi", new { id = marka.id }, new { @class = "btn btn-warning btn-sm" })
+                </td>
             </tr>
         }
     </tbody>

@@ -33,7 +33,7 @@
                         <td>@(racun.servisiFK?.idAuto.Vlasnik.PrezimeIme)</td>
                         <td>@racun.Datum.ToString("dd.MM.yyyy")</td>
                         <td>@racun.osoba</td>
-                        <td>@racun.cijena</td>
+                        <td>@(racun.cijena)kn</td>
                         <td>
                             @Html.ActionLink("Detalji", "Detalji", new { id = racun.id }, new { @class = "btn btn-info btn-sm" })
                         </td>
@@ -50,7 +50,7 @@
                         <td>@(racun.servisiFK?.idAuto.Vlasnik.PrezimeIme)</td>
                         <td>@racun.Datum.ToString("dd.MM.yyyy")</td>
                         <td>@racun.osoba</td>
-                        <td>@racun.cijena</td>
+                        <td>@(racun.cijena) kn</td>
                         <td>
                             @Html.ActionLink("Detalji", "Detalji", new { id = racun.id }, new { @class = "btn btn-info btn-sm" })
                             @Html.ActionLink("Dodavanje Stavki", "DodajStavkuRacuna", "RacunStavke", new { id = racun.id }, new { @class = "btn btn-info btn-sm" })

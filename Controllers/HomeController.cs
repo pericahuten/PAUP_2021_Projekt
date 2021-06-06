@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paup_2021_ServisVozila.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,11 @@ namespace Paup_2021_ServisVozila.Controllers
 {
     public class HomeController : Controller
     {
+        BazaDbContext bazaPodataka = new BazaDbContext();
         public ActionResult Index()
         {
-            return View();
+            var listaMarka = bazaPodataka.PopisMarka.ToList();
+            return View(listaMarka);
         }
 
         public ActionResult About()

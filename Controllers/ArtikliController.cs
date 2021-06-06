@@ -33,5 +33,64 @@ namespace Paup_2021_ServisVozila.Controllers
             bazaPodataka.SaveChanges();
             return RedirectToAction("Popis");
         }
+
+        public ActionResult Azuriraj(int id)
+        {
+            Artikli artikl;
+            artikl = bazaPodataka.PopisArtikla.FirstOrDefault(x => x.id == id);
+            if (artikl == null)
+            {
+                return HttpNotFound();
+            }
+            return View(artikl);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Azuriraj(Artikli artikl)
+        {
+            bazaPodataka.Entry(artikl).State = System.Data.Entity.EntityState.Modified;
+            if (ModelState.IsValid)
+            {
+                bazaPodataka.SaveChanges();
+                return RedirectToAction("Popis");
+            }
+            return View(artikl);
+        }
+
+        public ActionResult Brisi(int? id)
+        {
+            //ako id nije defiran preusmjeravamo korisnika na popis studenata
+            if (id == null)
+            {
+                return RedirectToAction("Popis");
+            }
+
+            //dohvaćamo studenta iz baze podataka na temelju id
+            Artikli a = bazaPodataka.PopisArtikla.FirstOrDefault(x => x.id == id);
+
+            //ako ne postoji student s tim id-em vraćamo HTTP status Not found
+            if (a == null)
+            {
+                return HttpNotFound();
+            }
+            return View(a);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Brisi(int id)
+        {
+            Artikli s = bazaPodataka.PopisArtikla.FirstOrDefault(x => x.id == id);
+            if (s == null)
+            {
+                return HttpNotFound();
+            }
+
+            bazaPodataka.PopisArtikla.Remove(s);
+            bazaPodataka.SaveChanges();
+
+            return View("BrisiStatus");
+        }
     }
 }

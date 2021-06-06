@@ -56,9 +56,51 @@ namespace Paup_2021_ServisVozila.Controllers
                 servis.StatusAuta = 3;
                 bazaPodataka.PopisStavki.Add(rs);
                 bazaPodataka.SaveChanges();
-                return RedirectToAction("Popis");
+                return RedirectToAction("Popis", "Racun");
             }
             return View(rs);
+        }
+
+        public ActionResult Brisi(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Popis");
+            }
+
+            RacunStavke rs = bazaPodataka.PopisStavki.FirstOrDefault(x => x.id == id);
+
+            if (rs == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rs);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Brisi(int id)
+        {
+            RacunStavke rs = bazaPodataka.PopisStavki.FirstOrDefault(x => x.id == id);
+            Racun r = bazaPodataka.PopisRacuna.FirstOrDefault(x => x.id == rs.idRacuna);
+            var cijena = 0;
+
+            if (rs == null)
+            {
+                return HttpNotFound();
+            }
+
+            bazaPodataka.PopisStavki.Remove(rs);
+            bazaPodataka.SaveChanges();
+            var popisStavki = bazaPodataka.PopisStavki.Where(x => x.idRacuna == r.id).ToList();
+            foreach (var x in popisStavki)
+            {
+                cijena += x.iznos;
+            }
+            r.cijena = cijena;
+            bazaPodataka.SaveChanges();
+
+            return View("BrisiStatus");
         }
     }
 }

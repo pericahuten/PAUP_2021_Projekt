@@ -1,0 +1,27 @@
+﻿@using Paup_2021_ServisVozila.Models
+@model Artikli
+@{
+    ViewBag.Title = "Potvrda brisanja artikla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<strong>Jeste li sigurni da želite izbrisati artikl @Model.Naziv ?</strong>
+
+<br />
+<br />
+
+@using (Html.BeginForm("Brisi", "Artikli"))
+{
+    @Html.AntiForgeryToken();
+
+    <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Izbriši
+    </button>
+
+    <br />
+    <br />
+
+    @Html.ActionLink("Odustani", "Popis")
+}
