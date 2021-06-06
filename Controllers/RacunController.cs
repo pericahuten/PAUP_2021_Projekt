@@ -1,5 +1,6 @@
 ﻿using Paup_2021_ServisVozila.Misc;
 using Paup_2021_ServisVozila.Models;
+using Paup_2021_ServisVozila.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,32 @@ namespace Paup_2021_ServisVozila.Controllers
                 return RedirectToAction("Popis");
             }
             return View(racun);
+        }
+        
+        public ActionResult IspisRacuna(int? id)
+        {
+            LogiraniKorisnik logKor = User as LogiraniKorisnik;
+            if (logKor != null)
+            {
+                ViewBag.Logirani = logKor.KorisnickoIme;
+            }
+
+            if (!id.HasValue)
+            {
+                return RedirectToAction("Popis");
+            }
+
+            Racun racun = bazaPodataka.PopisRacuna.FirstOrDefault(x => x.id == id);
+            var rs = bazaPodataka.PopisStavki.Where(x => x.idRacuna == racun.id).ToList();
+            if (racun == null)
+            {
+                return RedirectToAction("Popis");
+            }
+
+            RacunReport ispisracuna = new RacunReport();
+            ispisracuna.IspisRacuna(racun, rs, logKor);
+
+            return File(ispisracuna.Podaci, System.Net.Mime.MediaTypeNames.Application.Pdf, racun.servisiFK.idAuto.Vin + ".pdf");
         }
     }
 }

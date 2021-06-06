@@ -79,4 +79,13 @@
 
     <br />
 
+    <p>
+        <a href="@Url.Action("IspisRacuna", "Racun",
+                new { id = Model.id })" class="btn btn-primary btn-sm">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Ispis
+        </a>
+    </p>    
+
+    <br />
+
     @Html.ActionLink("Povratak na popis računa", "Popis", "Racun", null, new { @class = "btn btn-primary btn-sm" })
