@@ -23,6 +23,7 @@ namespace Paup_2021_ServisVozila.Controllers
             var listaRacuna = bazaPodataka.PopisRacuna.ToList();
             return View(listaRacuna);
         }
+
         [Authorize(Roles = OvlastiKorisnik.Administrator)]
         public ActionResult DodajRacun(Racun r, int id)
         {
@@ -38,6 +39,23 @@ namespace Paup_2021_ServisVozila.Controllers
             bazaPodataka.PopisRacuna.Add(r);
             bazaPodataka.SaveChanges();
             return RedirectToAction("Popis", "Racun");
+        }
+
+        public ActionResult Detalji(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToAction("Popis");
+            }
+            var PopisStavki = bazaPodataka.PopisStavki.Where(x => x.idRacuna == id).ToList();
+            ViewBag.Stavke = PopisStavki;
+            Racun racun = bazaPodataka.PopisRacuna.FirstOrDefault(x => x.id == id);
+
+            if (racun == null)
+            {
+                return RedirectToAction("Popis");
+            }
+            return View(racun);
         }
     }
 }

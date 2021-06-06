@@ -251,6 +251,17 @@
     <Content Include="Views\Servis\Detalji.cshtml" />
     <Content Include="Views\RacunStavke\DodajStavkuRacuna.cshtml" />
     <Content Include="Views\MarkeAutomobili\DodajMarku.cshtml" />
+    <Content Include="Views\Artikli\DodajArtikl.cshtml" />
+    <Content Include="Views\Korisnici\Azuriraj.cshtml" />
+    <Content Include="Views\Automobili\Azuriraj.cshtml" />
+    <Content Include="Views\Artikli\Azuriraj.cshtml" />
+    <Content Include="Views\Artikli\Brisi.cshtml" />
+    <Content Include="Views\Artikli\BrisiStatus.cshtml" />
+    <Content Include="Views\MarkeAutomobili\Brisi.cshtml" />
+    <Content Include="Views\MarkeAutomobili\BrisiStatus.cshtml" />
+    <Content Include="Views\Racun\Detalji.cshtml" />
+    <Content Include="Views\RacunStavke\Brisi.cshtml" />
+    <Content Include="Views\RacunStavke\BrisiStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

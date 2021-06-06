@@ -9,14 +9,27 @@
 <h2>@ViewBag.Title</h2>
 <table class="table table-striped">
     <thead>
-        <tr>
-            <th>VIN</th>
-            <th>Vlasnik vozila</th>
-            <th>Proizvođač</th>
-            <th>Model</th>
-            <th>Registracija</th>
-            <th>Akcije</th>
-        </tr>
+        @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
+        {
+            <tr>
+                <th>VIN</th>
+                <th>Vlasnik vozila</th>
+                <th>Proizvođač</th>
+                <th>Model</th>
+                <th>Registracija</th>
+            </tr>
+        }
+        else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+        {
+            <tr>
+                <th>VIN</th>
+                <th>Vlasnik vozila</th>
+                <th>Proizvođač</th>
+                <th>Model</th>
+                <th>Registracija</th>
+                <th>Akcije</th>
+            </tr>
+        }
     </thead>
     <tbody>
         @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
@@ -42,9 +55,12 @@
                 <tr>
                     <td>@auto.Vin</td>
                     <td>@(auto.Vlasnik?.PrezimeIme)</td>
-                    <th>@(auto.marka?.Marke)</th>
-                    <th>@auto.Model</th>
-                    <th>@auto.Registracija</th>
+                    <td>@(auto.marka?.Marke)</td>
+                    <td>@auto.Model</td>
+                    <td>@auto.Registracija</td>
+                    <td>
+                        @Html.ActionLink("Ažuriraj", "Azuriraj", new { vin = auto.Vin }, new { @class = "btn btn-warning btn-sm" })
+                    </td>
                 </tr>
             }
         }

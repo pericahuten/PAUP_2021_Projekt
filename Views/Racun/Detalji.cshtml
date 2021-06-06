@@ -1,0 +1,82 @@
+﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
+@model Racun
+@{
+    ViewBag.Title = "Detalji računa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    BazaDbContext db = new BazaDbContext();
+    var popis = db.PopisStavki.Where(x => x.idRacuna == Model.id).ToList();
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <strong>Vozilo:</strong>
+    </div>
+    <div class="col-md-9">
+        <strong>@(Model?.servisiFK?.idAuto?.Registracija)</strong>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <strong>Datum:</strong>
+    </div>
+    <div class="col-md-9">
+        <strong>@(Model.Datum.ToString("dd.MM.yyyy"))</strong>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <strong>Ovlasteni serviser:</strong>
+    </div>
+    <div class="col-md-9">
+        <strong>@(Model.osoba)</strong>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Redni broj stavke</th>
+            <th>Naziv</th>
+            <th>Kolicina</th>
+            <th>Iznos</th>
+            @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+            {
+                <th>Akcije</th>
+            }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in popis)
+            {
+            <tr>
+                <td>@(x.redniBroj)</td>
+                <td>@(x.ArtiklFK?.Naziv)</td>
+                <td>@(x.kolicina)</td>
+                <td>@(x.iznos) kn</td>
+                @if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+                {
+                    <td>@Html.ActionLink("Briši", "Brisi", "RacunStavke", new { id = x.id }, new { @class="btn btn-info btn-sm"})</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Ukupna cijena:</strong>
+        </div>
+        <div class="col-md-9">
+            <string>@(Model.cijena) kn</string>
+        </div>
+    </div>
+
+
+    <br />
+
+    @Html.ActionLink("Povratak na popis računa", "Popis", "Racun", null, new { @class = "btn btn-primary btn-sm" })

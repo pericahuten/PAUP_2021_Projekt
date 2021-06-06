@@ -14,16 +14,21 @@
             <th>Naziv artikla</th>
             <th>Jedinica mjere</th>
             <th>Cijena</th>
+            <th>Akcije</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var artikl in Model)
         {
             <tr>
-                <th>@artikl.id</th>
-                <th>@artikl.Naziv</th>
-                <th>@artikl.jedinicaMjere</th>
-                <th>@artikl.cijena</th>
+                <td>@artikl.id</td>
+                <td>@artikl.Naziv</td>
+                <td>@artikl.jedinicaMjere</td>
+                <td>@artikl.cijena</td>
+                <td>
+                    @Html.ActionLink("Ažuriraj", "Azuriraj", new { id = artikl.id }, new { @class = "btn btn-warning btn-sm" })
+                    @Html.ActionLink("Briši", "Brisi", new { id = artikl.id }, new { @class = "btn btn-warning btn-sm" })
+                </td>
             </tr>
         }
 </tbody>

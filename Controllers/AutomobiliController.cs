@@ -54,5 +54,45 @@ namespace Paup_2021_ServisVozila.Controllers
             }
             return View(auto);
         }
+
+        public ActionResult Azuriraj(string vin)
+        {
+            Automobili auto;
+            if(vin == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            auto = bazaPodataka.PopisAutomobila.FirstOrDefault(x => x.Vin == vin);
+            if(auto == null)
+            {
+                return HttpNotFound();
+            }
+            var marke = bazaPodataka.PopisMarka.OrderBy(x => x.Marke).ToList();
+            ViewBag.Marke = marke;
+            var korisnici = bazaPodataka.PopisKorisnika.OrderBy(x => x.KorisnickoIme).ToList();
+            ViewBag.Korisnici = korisnici;
+
+            return View(auto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Azuriraj(Automobili auto)
+        {
+            if (auto.Vin != "")
+            {
+                bazaPodataka.Entry(auto).State = System.Data.Entity.EntityState.Modified;
+            }
+            if (!VIN.validateVIN(auto.Vin))
+            {
+                ModelState.AddModelError("VIN", "Neispravan VIN broj vozila!");
+            }
+            if (ModelState.IsValid)
+            {
+                bazaPodataka.SaveChanges();
+                return RedirectToAction("Popis");
+            }
+            return View(auto);
+        }
     }
 }

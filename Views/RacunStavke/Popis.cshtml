@@ -16,18 +16,19 @@
             <th>Artikl</th>
             <th>Kolicina</th>
             <th>Iznos</th>
+            <th>Akcije</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var stavka in Model)
             {
                 <tr>
-                    <th>@stavka.id</th>
-                    <th>@(stavka.idRacuna)</th>
-                    <th>@stavka.redniBroj</th>
-                    <th>@(stavka.sifraArtikla)</th>
-                    <th>@stavka.kolicina</th>
-                    <th>@stavka.iznos</th>
+                    <td>@stavka.id</td>
+                    <td>@(stavka.idRacuna)</td>
+                    <td>@stavka.redniBroj</td>
+                    <td>@(stavka.sifraArtikla)</td>
+                    <td>@stavka.kolicina</td>
+                    <td>@stavka.iznos</td>
                 </tr>
             }
     </tbody>
