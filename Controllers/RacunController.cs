@@ -84,5 +84,44 @@ namespace Paup_2021_ServisVozila.Controllers
 
             return File(ispisracuna.Podaci, System.Net.Mime.MediaTypeNames.Application.Pdf, racun.servisiFK.idAuto.Vin + ".pdf");
         }
+
+        public ActionResult IspisRacunListe()
+        {
+            LogiraniKorisnik logKor = User as LogiraniKorisnik;
+            if (logKor != null)
+            {
+                ViewBag.Logirani = logKor.KorisnickoIme;
+            }
+
+            //administrator dohvaća sve racune te ispisuje
+            if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+            {
+                var racuniAdmin = bazaPodataka.PopisRacuna.OrderBy(x => x.id).ToList();
+
+                if (racuniAdmin == null)
+                {
+                    return RedirectToAction("Popis");
+                }
+                RacunListaReport ispisracunaAdmin = new RacunListaReport();
+                ispisracunaAdmin.IspisRacunListe(racuniAdmin, logKor);
+
+                return File(ispisracunaAdmin.Podaci, System.Net.Mime.MediaTypeNames.Application.Pdf, "PopisRacuna" + ".pdf");
+            }
+
+            //ispis racune za trenutnog koristnika
+            else
+            {
+                var racuni = bazaPodataka.PopisRacuna.Where(x => x.servisiFK.idAuto.Vlasnik.KorisnickoIme == logKor.KorisnickoIme).OrderBy(x => x.id).ToList();
+
+                if (racuni == null)
+                {
+                    return RedirectToAction("Popis");
+                }
+                RacunListaReport ispisracuna = new RacunListaReport();
+                ispisracuna.IspisRacunListe(racuni, logKor);
+
+                return File(ispisracuna.Podaci, System.Net.Mime.MediaTypeNames.Application.Pdf, "PopisAutomobila" + ".pdf");
+            }
+        }
     }
 }

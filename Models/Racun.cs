@@ -11,7 +11,7 @@ namespace Paup_2021_ServisVozila.Models
     public class Racun
     {
         [Key]
-        [Display(Name = "ID racuna")]
+        [Display(Name = "ID računa")]
         public int id { get; set; }
 
         [Display(Name="ID servisa")]

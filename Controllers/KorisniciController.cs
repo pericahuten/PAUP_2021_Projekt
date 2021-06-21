@@ -44,7 +44,7 @@ namespace Paup_2021_ServisVozila.Controllers
         public ActionResult Azuriraj(Korisnik kor)
         {
             if (kor.KorisnickoIme != "")
-            {
+            { 
                 bazaPodataka.Entry(kor).State = System.Data.Entity.EntityState.Modified;
             }
             if (ModelState.IsValid)

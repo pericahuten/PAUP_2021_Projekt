@@ -190,7 +190,9 @@
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\VIN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\RacunListaReport.cs" />
     <Compile Include="Reports\RacunReport.cs" />
+    <Compile Include="Reports\VozilaReport.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -263,9 +265,13 @@
     <Content Include="Views\Racun\Detalji.cshtml" />
     <Content Include="Views\RacunStavke\Brisi.cshtml" />
     <Content Include="Views\RacunStavke\BrisiStatus.cshtml" />
+    <Content Include="Views\Servis\Azuriraj.cshtml" />
+    <Content Include="Views\Automobili\Brisi.cshtml" />
+    <Content Include="Views\Automobili\BrisiStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

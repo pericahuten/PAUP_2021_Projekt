@@ -1,8 +1,9 @@
-ažuriranje automobila za korisnika
-te na narudzba servisa staviti text area za napomenu vlasnika
-zaglavlje za pdf ispis
-dodaj auto admin za ostale korisnike
-cijene artikla idu u minus!
-dodatni pdf-i 2 pdf-a ispis računa od nekog perioda do nekog perioda, popis vozila sortirano po marki
-brisanje automobila uz provjeru ako ima servis briše samo ako nema postojeći servis
-indikatori za servis, vozilo servisirano.
+ažuriranje automobila za korisnika +
+te na narudzba servisa staviti text area za napomenu vlasnika +
+zaglavlje za pdf ispis +
+dodaj auto admin za ostale korisnike + 
+cijene artikla idu u minus! + 
+dodatni pdf-i 2 pdf-a ispis računa od nekog perioda do nekog perioda, popis vozila sortirano po marki +
+i testne metode +
+brisanje automobila uz provjeru ako ima servis briše samo ako nema postojeći servis +
+indikatori za servis, vozilo servisirano. + 

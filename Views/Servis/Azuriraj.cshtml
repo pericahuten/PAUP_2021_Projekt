@@ -1,0 +1,163 @@
+﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
+@model Servisi
+@{
+    ViewBag.Title = "Azuriranje servisa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Azuriraj", "Servis", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "Ispravite podatke!");
+
+    @Html.HiddenFor(model => model.Id);
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.Id, new { disabled = true, @class = "form-control" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.AutoID);
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AutoID, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.AutoID, new { disabled = true, @class = "form-control" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.DatumKreiranja);
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DatumKreiranja, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-10">
+            @Html.TextBoxFor(model => model.DatumKreiranja, new { disabled = true, @class = "form-control" })
+        </div>
+    </div>
+
+    if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatumPocetka, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.DatumPocetka, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DatumPocetka, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatumZavrsetka, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.DatumZavrsetka, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DatumZavrsetka, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kilometraza, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Kilometraza, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Kilometraza, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.NapomenaVlasnika);
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NapomenaVlasnika, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.NapomenaVlasnika, new { disabled = true, @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NapomenServisera, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.NapomenServisera, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NapomenServisera, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Serviser);
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Serviser, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.Serviser, new { disabled = true, @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.StatusAuta);
+    }
+    else if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik)))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatumPocetka, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.DatumPocetka, new { disabled = true, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DatumPocetka, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatumZavrsetka, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.DatumZavrsetka, new { disabled = true, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DatumZavrsetka, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kilometraza, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.Kilometraza, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Kilometraza, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NapomenaVlasnika, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.NapomenaVlasnika, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NapomenaVlasnika, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.NapomenServisera);
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NapomenServisera, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.NapomenServisera, new { disabled = true, @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Serviser);
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Serviser, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.Serviser, new { disabled = true, @class = "form-control" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.StatusAuta);
+    }
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="false"></span> Spremi
+            </button>
+        </div>
+    </div>
+}
+
+
+@Html.ActionLink("Povratak bez ažuriranja", "Popis", "Servis")
+

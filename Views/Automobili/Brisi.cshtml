@@ -1,0 +1,27 @@
+﻿@using Paup_2021_ServisVozila.Models
+@model Automobili
+@{
+    ViewBag.Title = "Potvrda brisanja automobila";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<strong>Jeste li sigurni da želite izbrisati automobil: @(Model.Vlasnik?.PrezimeIme) - @(Model.marka?.Marke) @(Model.Model) - @Model.Registracija ?</strong>
+
+<br />
+<br />
+
+@using (Html.BeginForm("Brisi", "Automobili"))
+{
+    @Html.AntiForgeryToken();
+
+    <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Izbriši
+    </button>
+
+    <br />
+    <br />
+
+    @Html.ActionLink("Odustani", "Popis")
+}

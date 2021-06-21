@@ -21,7 +21,7 @@ namespace Paup_2021_ServisVozila.Models
         public string korisnikId { get; set; }
         public virtual Korisnik Vlasnik { get; set; }
 
-        [Display(Name = "Proizvodac automobila")]
+        [Display(Name = "Proizvodač automobila")]
         [Required(ErrorMessage = "{0} je obavezan")]
         [ForeignKey("marka")]
         public int Proizvodac { get; set; }
@@ -40,6 +40,14 @@ namespace Paup_2021_ServisVozila.Models
             get
             {
                 return marka?.Marke + " " + Model + ": " + Registracija;
+            }
+        }
+
+        public string AutomobilAdmin
+        {
+            get
+            {
+                return Vlasnik?.PrezimeIme + " - " + marka?.Marke + " " + Model + ": " + Registracija;
             }
         }
 

@@ -11,7 +11,7 @@ using Paup_2021_ServisVozila.Misc;
 
 namespace Paup_2021_ServisVozila.Reports
 {
-    public class RacunReport
+    public class RacunListaReport
     {
         public byte[] Podaci { get; private set; }
 
@@ -27,8 +27,7 @@ namespace Paup_2021_ServisVozila.Reports
             return c1;
         }
 
-
-        public void IspisRacuna(Racun r, List<RacunStavke> rs, LogiraniKorisnik k)
+        public void IspisRacunListe(List<Racun> racun, LogiraniKorisnik k)
         {
             BazaDbContext bazapodataka = new BazaDbContext();
 
@@ -83,53 +82,33 @@ namespace Paup_2021_ServisVozila.Reports
 
                     pdfDokument.Add(tZaglavlje);
 
-                    Paragraph pNaslov = new Paragraph("Podaci o računu", fontNaslov);
+                    Paragraph pNaslov = new Paragraph("Popis računa", fontNaslov);
                     pNaslov.Alignment = Element.ALIGN_CENTER;
                     pNaslov.SpacingBefore = 20;
                     pNaslov.SpacingAfter = 20;
                     pdfDokument.Add(pNaslov);
 
-                    PdfPTable x = new PdfPTable(2);
-                    x.SetWidths(new float[] { 2, 6 });
+                    PdfPTable x = new PdfPTable(5);
+                    x.SetWidths(new float[] { 1, 4, 6, 4, 2 });
                     x.WidthPercentage = 100;
                     x.SpacingBefore = 10;
 
-
-                    x.AddCell(GenerirajCeliju("Vozilo: ", fontTekstBold, tPozadinaSadrzaj, true));
-                    x.AddCell(GenerirajCeliju(r.servisiFK.idAuto.Registracija, fontTekst, tPozadinaSadrzaj, false));
+                    x.AddCell(GenerirajCeliju("ID: ", fontTekstBold, tPozadinaSadrzaj, true));
+                    x.AddCell(GenerirajCeliju("Vlasnik: ", fontTekstBold, tPozadinaSadrzaj, true));
                     x.AddCell(GenerirajCeliju("Datum: ", fontTekstBold, tPozadinaSadrzaj, true));
-                    x.AddCell(GenerirajCeliju(r.Datum.ToString("dd.MM.yyyy"), fontTekst, tPozadinaSadrzaj, false));
-                    x.AddCell(GenerirajCeliju("Ovlasteni serviser: ", fontTekstBold, tPozadinaSadrzaj, true));
-                    x.AddCell(GenerirajCeliju(r.osoba, fontTekst, tPozadinaSadrzaj, false));
-                    pdfDokument.Add(x);
+                    x.AddCell(GenerirajCeliju("Izdao: ", fontTekstBold, tPozadinaSadrzaj, true));
+                    x.AddCell(GenerirajCeliju("Cijena: ", fontTekstBold, tPozadinaSadrzaj, true));
 
-                    PdfPTable t = new PdfPTable(4);
-                    t.WidthPercentage = 100;
-                    t.SetWidths(new float[] { 2, 3, 1, 1 });
-
-                    t.AddCell(GenerirajCeliju("Rbr stavke", fontTablicaZaglavlje, tPozadinaZaglavlje, true));
-                    t.AddCell(GenerirajCeliju("Artikl", fontTablicaZaglavlje, tPozadinaZaglavlje, true));
-                    t.AddCell(GenerirajCeliju("Količina", fontTablicaZaglavlje, tPozadinaZaglavlje, true));
-                    t.AddCell(GenerirajCeliju("Iznos", fontTablicaZaglavlje, tPozadinaZaglavlje, true));
-                    foreach (var stavka in rs)
+                    foreach (var r in racun)
                     {
-                        t.AddCell(GenerirajCeliju(stavka.redniBroj.ToString(), fontTekst, tPozadinaSadrzaj, false));
-                        t.AddCell(GenerirajCeliju(stavka.ArtiklFK.Naziv.ToString(), fontTekst, tPozadinaSadrzaj, false));
-                        t.AddCell(GenerirajCeliju(stavka.kolicina.ToString(), fontTekst, tPozadinaSadrzaj, false));
-                        t.AddCell(GenerirajCeliju(stavka.iznos.ToString()+" kn", fontTekst, tPozadinaSadrzaj, false));
+                        x.AddCell(GenerirajCeliju(r.id.ToString(), fontTekst, tPozadinaSadrzaj, false));
+                        x.AddCell(GenerirajCeliju(r.servisiFK.idAuto.Vlasnik.PrezimeIme, fontTekst, tPozadinaSadrzaj, false));
+                        x.AddCell(GenerirajCeliju(r.Datum.ToString("dd.MM.yyyy"), fontTekst, tPozadinaSadrzaj, false));
+                        x.AddCell(GenerirajCeliju(r.osoba, fontTekst, tPozadinaSadrzaj, false));
+                        x.AddCell(GenerirajCeliju(r.cijena.ToString() + " kn", fontTekst, tPozadinaSadrzaj, false));
                     }
 
-                    pdfDokument.Add(t);
-
-                    PdfPTable c = new PdfPTable(2);
-                    c.SetWidths(new float[] { 6, 1 });
-                    c.WidthPercentage = 100;
-                    c.AddCell(GenerirajCeliju("Ukupna cijena", fontTekstBold, tPozadinaSadrzaj, true));
-                    c.AddCell(GenerirajCeliju(r.cijena + " kn", fontTekstBold, tPozadinaSadrzaj, false));
-                    c.SpacingAfter = 20;
-                    pdfDokument.Add(c);
-
-
+                    pdfDokument.Add(x);
                     Paragraph pMjesto = new Paragraph(DateTime.Now.ToString("dd.MM.yyyy"), fontTekst);
                     pMjesto.Alignment = Element.ALIGN_RIGHT;
                     pdfDokument.Add(pMjesto);
