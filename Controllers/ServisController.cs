@@ -31,7 +31,10 @@ namespace Paup_2021_ServisVozila.Controllers
             LogiraniKorisnik k = User as LogiraniKorisnik;
             var vlasnik = bazaPodataka.PopisAutomobila.Where(x => x.korisnikId == k.KorisnickoIme).ToList();
             vlasnik.Insert(0, new Automobili { Vin = "123", Proizvodac = 0, Model = "Odaberite auto" });
+            var svi = bazaPodataka.PopisAutomobila.OrderBy(x => x.korisnikId).ToList();
+            svi.Insert(0, new Automobili { Vin = "123", Proizvodac = 0, Model = "Odaberite auto" });
             ViewBag.Vlasnik = vlasnik;
+            ViewBag.Svi = svi; 
             return View();
         }
 
@@ -66,5 +69,43 @@ namespace Paup_2021_ServisVozila.Controllers
             }
             return View(servisi);
         }
+
+        public ActionResult Azuriraj(int? id)
+        {
+            Servisi servis;
+            servis = bazaPodataka.PopisServisa.FirstOrDefault(x => x.Id == id);
+            if (servis == null)
+            {
+                return HttpNotFound();
+            }
+            var ovlast = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
+            ViewBag.Ovlast = ovlast;
+
+            return View(servis);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Azuriraj(Servisi servis)
+        {
+            LogiraniKorisnik k = User as LogiraniKorisnik;
+            if (servis.Id != 0)
+            {
+                bazaPodataka.Entry(servis).State = System.Data.Entity.EntityState.Modified;
+            }
+            if (ModelState.IsValid)
+            {
+                if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik)))
+                {
+                    servis.Serviser = servis.Serviser;
+                }
+                else
+                    servis.Serviser = k.PrezimeIme;
+                bazaPodataka.SaveChanges();
+                return RedirectToAction("Popis");
+            }
+            return View(servis);
+        }
+
     }
 }

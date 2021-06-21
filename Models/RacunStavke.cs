@@ -15,7 +15,7 @@ namespace Paup_2021_ServisVozila.Models
         public int id { get; set; }
 
         [Column("id_racuna")]
-        [Display(Name = "Id racuna")]
+        [Display(Name = "Id računa")]
         [Required(ErrorMessage = "{0} je obavezan")]
         [ForeignKey("RacunFK")]
         public int idRacuna { get; set; }
@@ -27,7 +27,7 @@ namespace Paup_2021_ServisVozila.Models
         public int redniBroj { get; set; }
 
         [Column("sifra_artikla")]
-        [Display(Name = "Sifra artikla")]
+        [Display(Name = "Šifra artikla")]
         [Required(ErrorMessage = "{0} je obavezna")]
         [ForeignKey("ArtiklFK")]
         public int sifraArtikla { get; set; }

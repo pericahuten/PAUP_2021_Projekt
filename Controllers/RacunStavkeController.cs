@@ -53,7 +53,7 @@ namespace Paup_2021_ServisVozila.Controllers
                     price += x.iznos; 
                 }
                 r.cijena = price+rs.iznos;
-                servis.StatusAuta = 3;
+                servis.StatusAuta = 2;
                 bazaPodataka.PopisStavki.Add(rs);
                 bazaPodataka.SaveChanges();
                 return RedirectToAction("Popis", "Racun");

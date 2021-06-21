@@ -24,6 +24,7 @@ namespace Paup_2021_ServisVozila.Models
 
         [Display(Name = "Cijena artikla")]
         [Required(ErrorMessage = "{0} je obavezna")]
+        [Range(1,99999,ErrorMessage = "Vrijednost nije valjana")]
         public int cijena { get; set; }
     }
 }

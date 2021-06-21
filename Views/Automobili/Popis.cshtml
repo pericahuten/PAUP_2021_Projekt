@@ -2,8 +2,9 @@
 @using Paup_2021_ServisVozila.Misc
 @model List<Automobili>
 @{
-    ViewBag.Title = "Popis automobila";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    BazaDbContext db = new BazaDbContext();
+    var popisServisa = db.PopisServisa.OrderBy(x=>x.AutoID).ToList();
 }
 
 <h2>@ViewBag.Title</h2>
@@ -17,6 +18,7 @@
                 <th>Proizvođač</th>
                 <th>Model</th>
                 <th>Registracija</th>
+                <th>Akcije</th>
             </tr>
         }
         else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
@@ -44,6 +46,13 @@
                         <td>@(auto.marka?.Marke)</td>
                         <td>@auto.Model</td>
                         <td>@auto.Registracija</td>
+                        <td>
+                        @Html.ActionLink("Ažuriraj", "Azuriraj", new { vin = auto.Vin }, new { @class = "btn btn-warning btn-sm" })
+                        @if ((popisServisa.FirstOrDefault(x=>x.AutoID == auto.Vin)==null))
+                        {
+                            @Html.ActionLink("Briši", "Brisi", new { id = auto.Vin}, new { @class="btn btn-info btn-sm"})
+                        }
+                            </td>
                     </tr>
                 }
             }
@@ -60,9 +69,18 @@
                     <td>@auto.Registracija</td>
                     <td>
                         @Html.ActionLink("Ažuriraj", "Azuriraj", new { vin = auto.Vin }, new { @class = "btn btn-warning btn-sm" })
+                        @if ((popisServisa.FirstOrDefault(x => x.AutoID == auto.Vin) == null))
+                        {
+                            @Html.ActionLink("Briši", "Brisi", new { id = auto.Vin }, new { @class = "btn btn-info btn-sm" })
+                        }
                     </td>
                 </tr>
             }
         }
     </tbody>
 </table>
+<p>
+    <a href="@Url.Action("IspisVozila", "Automobili")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Kreiraj PDF
+    </a>
+</p>
