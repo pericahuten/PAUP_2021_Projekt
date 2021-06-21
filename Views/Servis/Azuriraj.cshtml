@@ -92,23 +92,27 @@
             </div>
         </div>
 
-        @Html.HiddenFor(model => model.StatusAuta);
+        <div class="form-group">
+            @Html.LabelFor(model => model.StatusAuta, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.StatusAuta, new SelectList(ViewBag.Status, "id", "StatusAutomobila"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StatusAuta, "", new { @class = "text-danger" })
+            </div>
+        </div>
     }
     else if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik)))
     {
         <div class="form-group">
             @Html.LabelFor(model => model.DatumPocetka, new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                @Html.EditorFor(model => model.DatumPocetka, new { disabled = true, @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DatumPocetka, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.DatumPocetka, new { disabled = true, @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DatumZavrsetka, new { @class = "col-sm-2 control-label" })
             <div class="col-sm-10">
-                @Html.EditorFor(model => model.DatumZavrsetka, new { disabled = true, @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DatumZavrsetka, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.DatumZavrsetka, new { disabled = true, @class = "form-control" })
             </div>
         </div>
 
@@ -148,7 +152,6 @@
 
         @Html.HiddenFor(model => model.StatusAuta);
     }
-
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-success">

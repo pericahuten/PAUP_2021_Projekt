@@ -31,6 +31,12 @@ namespace Paup_2021_ServisVozila.Controllers
             var proizvodaci = bazaPodataka.PopisMarka.OrderBy(x => x.Marke).ToList();
             proizvodaci.Insert(0, new MarkeAutomobili { id = 1, Marke = "Odaberite proizvođača" });
             ViewBag.Proizvodaci = proizvodaci;
+            if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
+            {
+                var korisnici = bazaPodataka.PopisKorisnika.OrderBy(x => x.Prezime).ToList();
+                korisnici.Insert(0, new Korisnik { KorisnickoIme = "a", Email = "Odaberite korisnika" });
+                ViewBag.Korisnici = korisnici;
+            }
             return View();
         }
 
@@ -47,12 +53,24 @@ namespace Paup_2021_ServisVozila.Controllers
                 ViewBag.Logirani = logKor.KorisnickoIme;
             }
 
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik)))
+            { 
+                if (ModelState.IsValid)
+                {
+                    auto.korisnikId = logKor.KorisnickoIme;
+                    bazaPodataka.PopisAutomobila.Add(auto);
+                    bazaPodataka.SaveChanges();
+                    return View("DodavanjeAuta");
+                }
+            }
+            else if (User.Identity.IsAuthenticated && ((User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator)))
             {
-                auto.korisnikId = logKor.KorisnickoIme;
-                bazaPodataka.PopisAutomobila.Add(auto);
-                bazaPodataka.SaveChanges();
-                return View("DodavanjeAuta");
+                if (ModelState.IsValid)
+                {
+                    bazaPodataka.PopisAutomobila.Add(auto);
+                    bazaPodataka.SaveChanges();
+                    return View("DodavanjeAuta");
+                }
             }
             return View(auto);
         }

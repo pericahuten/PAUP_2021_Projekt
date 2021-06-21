@@ -31,10 +31,7 @@ namespace Paup_2021_ServisVozila.Controllers
             LogiraniKorisnik k = User as LogiraniKorisnik;
             var vlasnik = bazaPodataka.PopisAutomobila.Where(x => x.korisnikId == k.KorisnickoIme).ToList();
             vlasnik.Insert(0, new Automobili { Vin = "123", Proizvodac = 0, Model = "Odaberite auto" });
-            var svi = bazaPodataka.PopisAutomobila.OrderBy(x => x.korisnikId).ToList();
-            svi.Insert(0, new Automobili { Vin = "123", Proizvodac = 0, Model = "Odaberite auto" });
             ViewBag.Vlasnik = vlasnik;
-            ViewBag.Svi = svi; 
             return View();
         }
 
@@ -80,6 +77,8 @@ namespace Paup_2021_ServisVozila.Controllers
             }
             var ovlast = bazaPodataka.PopisOvlasti.OrderBy(x => x.Naziv).ToList();
             ViewBag.Ovlast = ovlast;
+            var status = bazaPodataka.PopisStatusa.OrderBy(x => x.id).ToList();
+            ViewBag.Status = status;
 
             return View(servis);
         }
@@ -89,6 +88,10 @@ namespace Paup_2021_ServisVozila.Controllers
         public ActionResult Azuriraj(Servisi servis)
         {
             LogiraniKorisnik k = User as LogiraniKorisnik;
+            if(k != null)
+            {
+                ViewBag.Logirani = k.KorisnickoIme;
+            }
             if (servis.Id != 0)
             {
                 bazaPodataka.Entry(servis).State = System.Data.Entity.EntityState.Modified;

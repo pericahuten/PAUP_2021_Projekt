@@ -26,6 +26,8 @@ namespace Paup_2021_ServisVozila.Models
 
         public DbSet<Ovlast> PopisOvlasti { get; set; }
 
+        public DbSet<Status> PopisStatusa { get; set; }
+
 
 
 
