@@ -47,12 +47,12 @@
                         <td>@auto.Model</td>
                         <td>@auto.Registracija</td>
                         <td>
-                        @Html.ActionLink("Ažuriraj", "Azuriraj", new { vin = auto.Vin }, new { @class = "btn btn-warning btn-sm" })
-                        @if ((popisServisa.FirstOrDefault(x=>x.AutoID == auto.Vin)==null))
-                        {
-                            @Html.ActionLink("Briši", "Brisi", new { id = auto.Vin}, new { @class="btn btn-info btn-sm"})
-                        }
-                            </td>
+                            @Html.ActionLink("Ažuriraj", "Azuriraj", new { vin = auto.Vin }, new { @class = "btn btn-warning btn-sm" })
+                            @if ((popisServisa.FirstOrDefault(x=>x.AutoID == auto.Vin)==null))
+                            {
+                                @Html.ActionLink("Briši", "Brisi", new { id = auto.Vin}, new { @class="btn btn-info btn-sm"})
+                            }
+                        </td>
                     </tr>
                 }
             }

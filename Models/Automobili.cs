@@ -43,13 +43,5 @@ namespace Paup_2021_ServisVozila.Models
             }
         }
 
-        public string AutomobilAdmin
-        {
-            get
-            {
-                return Vlasnik?.PrezimeIme + " - " + marka?.Marke + " " + Model + ": " + Registracija;
-            }
-        }
-
     }
 }

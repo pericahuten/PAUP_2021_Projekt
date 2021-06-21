@@ -1,4 +1,5 @@
 ﻿@using Paup_2021_ServisVozila.Models
+@using Paup_2021_ServisVozila.Misc
 @model Automobili
 @{
     ViewBag.Title = "Dodavanje automobila korisnika";
@@ -12,45 +13,89 @@
     @Html.AntiForgeryToken();
     @Html.ValidationSummary(true, "Ispravite podatke!");
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Vin, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Vin, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Vin, "", new { @class = "text-danger" })
+    if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Korisnik))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vin, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-         @Html.LabelFor(model => model.Proizvodac, new { @class = "col-sm-2 control-label" })
-         <div class="col-sm-10">
-             @Html.DropDownListFor(model => model.Proizvodac, new SelectList(ViewBag.Proizvodaci, "id", "Marke"), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Proizvodac, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Proizvodac, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.Proizvodac, new SelectList(ViewBag.Proizvodaci, "id", "Marke"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Proizvodac, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Registracija, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Registracija, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Registracija, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Registracija, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Registracija, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Registracija, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success">
-                <span class="glyphicon glyphicon-floppy-disk" aria-hidden="false"></span> Spremi
-            </button>
+    }
+    else if (User.Identity.IsAuthenticated && (User as LogiraniKorisnik).IsInRole(OvlastiKorisnik.Administrator))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.korisnikId, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.korisnikId, new SelectList(ViewBag.Korisnici, "KorisnickoIme", "PrezimeIme"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.korisnikId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-}
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Proizvodac, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.DropDownListFor(model => model.Proizvodac, new SelectList(ViewBag.Proizvodaci, "id", "Marke"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Proizvodac, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Registracija, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Registracija, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Registracija, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="false"></span> Spremi
+                </button>
+            </div>
+        </div>
+    }
 
