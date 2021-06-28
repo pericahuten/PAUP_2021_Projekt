@@ -1,0 +1,88 @@
+﻿artikli:
+"id","naziv","jedinica_mjere","cijena"
+"1","Ulje","l","15"
+"2","Filter","kom","55"
+"4","Filter za gorivo","kom","25"
+"5","Test123","kom","12"
+
+automobili:
+"VIN","KorisnikID","Proizvodac","Model","Registracija"
+"1C3EL56R34N349120","user111","4","RX-8","XD-123-AS"
+"1FMCU9G98FUA49793","user111","5","blyat","1234123"
+"1G1AP14PX67607352","user111","1","asdfasdf","asdf12"
+"1HGCG5644WA047116","user111","1","M3","VŽ-356-CS"
+"1HTLKTVR4HH508441","user111","2","M3","VŽ-356-CS"
+"1HVBRAAP12B989654","user111","3","S class","XD-123-AS"
+"3GNFK16R2WG133743","user111","1","RS6","XD-123-AS"
+"3LN6L2G98DR835654","user111","2","asdfasdf","XD-123-AS"
+"4V4MC9GFX7N400060","Ivovic","5","asda","123asd"
+"5N1AR18WX5C757630","user111","4","rx2","asdasd"
+"5NPDH4AE9FH554550","testuser","2","M3","asdf12"
+"JM1BL1UG9C1505353","user111","3","AMG","VŽ-356-CS"
+"KMHGC4DD8EU226552","Ivovic","4","MX-5","VŽ-321-FS"
+
+korisnici:
+"korisnicko_ime","Ime","Prezime","MobilniBroj","Email","Lozinka","ovlast"
+"Ivovic","Ivo","Ivić","952314235","asdttt@gmail.com","+/s4bv6mfoFvLdoKjJSpjrIDdXrrs/VfGDdVoZLURGc=","US"
+"testuser","test","user1","1234567890","testuser@gmail.com","7NcYcNGWMxapfjrDQIyYNa2M8PPBvHA1J8MCZVNPda4=","US"
+"user111","Pero","Perić","952152345","peroperic@gmail.com","jUPY60RIRBTWGhhlm0Q/v+UjmVENpGidU1K9ljHGxRs=","AD"
+
+marke_automobili:
+"id","Marke"
+"0","Citroen"
+"1","Audi"
+"2","BMW"
+"3","Mercedes"
+"4","Mazda"
+"5","Opel"
+"6","Peugeot"
+"7","VW"
+"8","Toyota"
+
+ovlasti:
+"sifra","naziv"
+"AD","Administrator"
+"US","Korisnik"
+
+racun:
+"id","servis","Datum","Izdaje_osoba","Cijena"
+"4","49","6/5/2021","Perić Pero","100"
+"5","50","6/5/2021","Perić Pero","530"
+"6","55","6/5/2021","Perić Pero","65"
+"7","49","6/5/2021","Perić Pero","30"
+
+racun_stavke:
+"id","id_racuna","redni_broj_stavke","sifra_artikla","kolicina","iznos"
+"1","5","1","2","2","110"
+"13","5","2","1","2","30"
+"14","5","3","2","5","275"
+"15","5","4","1","1","15"
+"16","5","5","1","1","15"
+"17","5","6","2","1","55"
+"19","5","7","1","1","15"
+"22","4","1","2","1","55"
+"23","4","2","1","1","15"
+"28","6","1","4","2","50"
+"29","6","2","1","1","15"
+"30","7","1","1","2","30"
+"31","5","8","1","1","15"
+"33","4","3","1","1","15"
+"34","4","4","1","1","15"
+
+servisi:
+"ID_Servisa","autoID","Datum_kreiranja_zahtjeva","Datum_pocetka_servisa","Datum_zavrsetka_servisa","Napomena_vlasnika","Napomena_servisera","Kilometraza","Serviser","Status"
+"49","1HGCG5644WA047116","5/29/2021","1/1/0001","1/1/0001","Proba 1",null,"0","Nedodjeljen","3"
+"50","KMHGC4DD8EU226552","5/29/2021","1/1/0001","1/1/0001","Test za servis",null,"150000","Nedodjeljen","3"
+"51","3LN6L2G98DR835654","5/29/2021","1/1/0001","1/1/0001","Proba 1",null,"0","Nedodjeljen","1"
+"52","1FMCU9G98FUA49793","6/5/2021","6/7/2021","1/1/0001","asdf",null,"0","Nedodjeljen","1"
+"53","1G1AP14PX67607352","6/5/2021","6/7/2021","1/1/0001","Proba 1",null,"0","Nedodjeljen","1"
+"54","1G1AP14PX67607352","6/5/2021","6/3/2021","1/1/0001","Proba 1",null,"0","Nedodjeljen","1"
+"55","5NPDH4AE9FH554550","6/5/2021","6/10/2021","1/1/0001","test dodavanje","test za status","0","Perić Pero","3"
+"56","KMHGC4DD8EU226552","6/5/2021","6/11/2021","1/1/0001","adsffasdf","test123","123","Perić Pero","1"
+"57","4V4MC9GFX7N400060","6/20/2021","6/21/2021","1/1/0001","test123",null,"0","Nedodjeljen","1"
+
+status:
+"id","Status"
+"1","Zahtjev kreiran"
+"2","Vozilo servisirano"
+"3","Zahtjev storniran"
